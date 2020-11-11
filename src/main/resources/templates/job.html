@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<div th:insert="fragments.html :: head"></div>
+
+
+<body>
+	<header>
+		<div th:insert="fragments.html :: menu"></div>
+		<h1><span th:text="#{job.heading}">A Town</span></h1>
+	</header>
+	 
+	 <div th:if="${job.jobActive == true and  lowestbid != 0}">
+    <div th:text="#{job.lowestbid}+ ': ' + ${lowestbid}">Lowest Bid</div>
+  
+</div>
+<div th:if="${job.jobActive == false and  lowestbid != 0}">
+    <div th:text="#{job.winning}+ ': ' + ${lowestbid}">Winning Bid</div>
+</div>
+
+<div th:if="${job.jobActive == true and  lowestbid == 0}">
+    <div th:text="#{job.nobid}">No Bids Yet</div>
+    </div>
+    
+    <div th:if="${job.jobActive == false and  lowestbid == 0}">
+    <div th:text="#{job.nowinning}">No Winning</div>
+    </div>
+
+<br /><br />
+	<table>
+		<tr>
+			<th th:text="#{job.jobId}">ID</th>
+			<th th:text="#{job.jobName}">Job Name</th>
+			<th th:text="#{job.description}">Description</th>
+		</tr>
+		<tr th:object="${job}">
+			<td th:text="*{jobId}">ID</td>
+			<td th:text="*{jobName}">Job Name</td>
+			<td th:text="*{description}">Description</td>
+		</tr>
+	</table>
+ 
+ <div th:if="${job.jobActive == true}">
+ 	<span sec:authorize="!isAuthenticated()">
+			<h3><a th:href="@{/login}" id="loginbutton" th:text="#{job.login}">Please login to place a bid.</a></h3>
+			</span>
+		 </div>	
+
+ <div th:if="${job.jobActive == true}">
+ <span sec:authorize="isAuthenticated()">
+  <h3> <a th:href="@{'/newbid/' + ${job.jobId}}" th:text="#{job.addbid}">Click here to add your bid</a>	</h3>
+   </span>
+   </div>
+    <div th:if="${job.jobActive == false}">
+    	<br /><br />
+       <div th:text="#{job.closed}">Closed</div>
+		 </div>	
+
+	 <div th:if="${lowestbid != 0}">
+	<br />
+	<br />
+	<table>
+		<tr>
+			<th th:text="#{bid.id}">ID</th>
+			<th th:text="#{bid.amount}">Bid Amount</th>
+		</tr>
+
+		<tr th:each="bid,iterationCount : ${bids}"
+			th:class="${iterationCount.even}? 'even'" th:object="${bid}">
+			<td th:text="*{bidId}">ID</td>
+			<td th:text="*{bidAmount}">TOWN</td>
+		</tr>
+	</table>
+	<div>
+		
+	<footer th:insert="fragments.html :: footer"></footer>
+
+</body>
+</html>

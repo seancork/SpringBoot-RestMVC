@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:insert="fragments.html :: head"></div>
+
+<body>
+	<header>
+		<div th:insert="fragments.html :: menu"></div>
+	</header>
+	<main>
+		<h1><span th:text="#{index.welcome}">WELCOME</span></h1>
+	</main>
+	<footer th:insert="fragments.html :: footer"></footer>
+</body>
+</html>

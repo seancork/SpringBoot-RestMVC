@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:insert="fragments.html :: head"></div>
+
+
+<body>
+	<header>
+		<div th:insert="fragments.html :: menu"></div>
+		<h1><span th:text="#{newjob.heading}">New Job</span></h1>
+	</header>
+
+	<form id="newCountyForm" method="post" th:action="@{/newjob}" th:object="${jobForm}">
+		<label for="jobName" th:text="#{newjob.jobName}" ></label>
+			                                         <!-- The span is connected to the countyName field through th:errors. It appears if there was a binding problem and  -->
+			                                         <!--  displays the Size.countyName message from messages.properties --> 
+		<input type="text" th:field="*{jobName}"/><span th:if="${#fields.hasErrors('jobName')}" th:errors="*{jobName}" >Error</span> 
+		
+		<br /><br />
+		
+			<label for="description" th:text="#{newjob.description}" ></label> 
+		<input type="text" th:field="*{description}"/><span th:if="${#fields.hasErrors('description')}" th:errors="*{description}" >Error</span> 
+		<br>
+		<input type="submit" th:value="#{newjob.addjob}"/>
+	</form>
+	<!-- This message is shown if the ${duplicate} variable was created. -->
+	<h3 class="error" th:if="${duplicate}" th:text="#{newjob.duplicate}">Error</h3>
+	
+	<footer th:insert="fragments.html :: footer"></footer>
+</body>
+</html>
+

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:insert="fragments.html :: head"></div>
+
+
+<body>
+	<header>
+		<div th:insert="fragments.html :: menu"></div>
+		<h1><span th:text="#{login.403}">Access Denied</span></h1>
+	</header>
+   
+   <h1> th:text="#{403.message}">You do not have permission to access this page!</h1>
+   	
+	
+	<footer th:insert="fragments.html :: footer"></footer>
+</body>
+</html>
+

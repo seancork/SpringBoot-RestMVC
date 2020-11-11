@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:insert="fragments.html :: head"></div>
+
+
+<body>
+<header>
+		<div th:insert="fragments.html :: menu"></div>
+		<h1><span th:text="#{jobs.heading}">All jobs</span></h1>
+	</header>
+
+	<table>
+		<tr>
+			
+			<th th:text="#{jobs.id}">Job Id</th>
+			<th th:text="#{jobs.description}">Job Description</th>
+			<th th:text="#{jobs.jobname}">Job Name</th>
+			<th th:text="#{jobs.status}">Job Status</th>
+			<th th:text="#{jobs.viewjob}">View Job</th>
+		</tr>
+		<tr th:each="job,iterationCount : ${jobs}" th:class="${iterationCount.even}? 'even'" th:object="${job}"	>			
+			<td th:text="*{jobId}">ID</td>
+			<td th:text="*{description}">Description</td>		
+			<td th:text="*{jobName}">JobName</td>
+			<td th:text="*{jobActive}">Job Open</td>
+		     <td ><a th:href="@{'showjob/' + *{jobId}}">
+		     <spam th:text="#{jobs.viewjob}">View Job</spam>
+		     </a></td>
+		  
+</td>
+			
+		</tr>
+	</table>
+	
+	<footer th:insert="fragments.html :: footer"></footer>
+
+
+</body>
+</html>
+
+
+<!--   -->

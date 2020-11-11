@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:insert="fragments.html :: head"></div>
+
+
+<body>
+<header>
+		<div th:insert="fragments.html :: menu"></div>
+		<h1><span th:text="#{error.heading}">Error</span></h1>
+	</header>
+
+<div class="error-page">
+	 <h1><div th:text="#{error.error}">Error</div></h1>
+	</div>
+
+	<footer th:insert="fragments.html :: footer"></footer>
+
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:insert="fragments.html :: head"></div>
+
+<body>
+	<header>
+		<div th:insert="fragments.html :: menu"></div>
+		<h1><span th:text="#{register.heading}">Register</span></h1>
+	</header>
+
+	<form id="newRegisterForm" method="post" th:action="@{/register}" th:object="${registerForm}">
+		<label for="jobName" th:text="#{register.email}" ></label>
+			                                       
+		<input type="email" th:field="*{email}"/><span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" >Error</span> 
+		
+		<br /><br />
+		
+			<label for="name" th:text="#{register.name}" ></label> 
+		<input type="text" th:field="*{name}"/><span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" >Error</span> 
+		<br /><br />
+		
+		<label for="phonenum" th:text="#{register.phonenum}" ></label> 
+		<input type="text" th:field="*{phonenum}"/><span th:if="${#fields.hasErrors('phonenum')}" th:errors="*{phonenum}" >Error</span> 
+		<br /><br />
+		
+		
+		<label for="name" th:text="#{register.password}" ></label> 
+		<input type="password" th:field="*{password}"/><span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" >Error</span> 
+		<br /><br />
+		<input type="submit" th:value="#{register.newuser}"/>
+	</form>
+	<!-- This message is shown if the ${duplicate} variable was created. -->
+	<h3 class="error" th:if="${duplicate}" th:text="#{register.duplicate}">Error</h3>
+	
+	<!-- This message is shown if successful -->
+	<h3 class="success" th:if="${success}" th:text="#{register.success}">Success</h3>
+	<footer th:insert="fragments.html :: footer"></footer>
+</body>
+</html>
+
